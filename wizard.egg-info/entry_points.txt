@@ -1,0 +1,4 @@
+[console_scripts]
+wd = wizard.wizard:main
+wizard = wizard.wizard:main
+
