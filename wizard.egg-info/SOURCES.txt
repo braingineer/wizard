@@ -1,9 +1,0 @@
-setup.py
-wizard/__init__.py
-wizard/stopwatch.py
-wizard/wizard.py
-wizard.egg-info/PKG-INFO
-wizard.egg-info/SOURCES.txt
-wizard.egg-info/dependency_links.txt
-wizard.egg-info/entry_points.txt
-wizard.egg-info/top_level.txt
