@@ -14,8 +14,16 @@ logger.setLevel(logging.INFO)
 I3DIR = os.path.join(os.environ['HOME'], '.config/i3')
 BGDIR = os.path.join(os.environ['HOME'], 'Pictures/wallpapers')
 
+all_bg = glob.glob(os.path.join(BGDIR, "*.png"))
+all_bg += glob.glob(os.path.join(BGDIR, "*.jpg"))
+all_bg += glob.glob(os.path.join(BGDIR, "*/*.png"))
+all_bg += glob.glob(os.path.join(BGDIR, "*/*.jpg"))
+
+
 screen_configs = {'office': [('HDMI-0', ['--auto', '--primary']),
-                             ('eDP-1-1', ['--off'])]}
+                             ('eDP-1-1', ['--off'])],
+                  'laptop': [('HDMI-0', ['--off']),
+                             ('eDP-1-1', ['--auto', '--primary'])]}
 
 bgs = {'gnu': os.path.join(BGDIR, 'minimalistdump_fromreddit/gnu.png')}
 
@@ -38,11 +46,24 @@ def _replace_i3_config(replace_version):
     subprocess.Popen(['cp', config_new, config])
     _i3_restart()
 
+def _jupyter_notebook(notebook_dir=None, port=None, in_tmux=True):
+    #jupyter notebook --notebook-dir /home/brian/code/ --port=8777 --no-browser
+    command = ['jupyter', 'notebook']
+    if notebook_dir is not None:
+        command += ['--notebook-dir', notebook_dir]
+    if port is not None:
+        command += ['--port', str(port)]
+    command += ['--no-browser']
+    if in_tmux:
+        _run_in_tmux('pylab', command)
+    else:
+        subprocess.Popen(command)
+
 def _xrandr(target, options):
     subprocess.Popen(['xrandr', '--output', target] + options)
 
-def _set_bg(bgname):
-    subprocess.Popen(['feh', '--bg-scale', bgs[bgname]])
+def _set_bg(bgpath):
+    subprocess.Popen(['feh', '--bg-scale', bgpath])
 
 def _output(*strings, prompt=">>"):
     logger.info(" ".join(strings), extra={'prompt': prompt})
@@ -59,16 +80,16 @@ class WizardShell(cmd.Cmd):
     file = None
     #server = libtmux.Server()
 
-    def do_pylab(self, arg):
-        if len(arg) > 0:
-            raise NotImplemented("- only local pylab")
-        _run_in_tmux("pylab", "~/inky_functions/start_jupyter.sh")
-
     def do_exit(self, args):
         sys.exit(0)
 
     def do_echo(self, args):
         _output(args)
+
+    def do_pylab(self, arg):
+        if len(arg) > 0:
+            raise NotImplemented("- only local pylab")
+        _run_in_tmux("pylab", "~/inky_functions/start_jupyter.sh")
 
     def do_i3env(self, args):
         arg = _single_arg("i3env", args)
@@ -94,10 +115,13 @@ class WizardShell(cmd.Cmd):
 
         if arg == "ls":
             _output(", ".join(bgs.keys()), prompt='options')
+        elif arg == "random":
+            import random
+            _set_bg(random.choice(all_bg))
         elif arg not in bgs:
             raise ValueError(arg + " not in available backgrounds")
         else:
-            _set_bg(arg)
+            _set_bg(bgs[arg])
 
     def precmd(self, line):
         return line
