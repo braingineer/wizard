@@ -1,0 +1,95 @@
+#############################
+# WORKSPACE FUNCTIONS
+#############################
+
+# workspace setup
+
+bindsym $mod+Control+Right move workspace to output right
+bindsym $mod+Control+Left move workspace to output left
+bindsym $mod+Control+Up move workspace to output up
+bindsym $mod+Control+Down move workspace to output down
+
+# define the workspace
+
+set $hypw1 [q]ueue
+set $hypw2 [w]eb
+set $hypw3 [e]lab
+set $hypw4  h[a]ck
+set $hypw5 [s]sh
+set $hypw6 [d]ev
+set $hypw7 [z]
+set $hypw8 [x]
+set $hypw9 [c]ode
+set $hypw10 [r]ead
+set $hypw11 trade[v]iew
+set $hypw12 [t]rade
+set $hypw13 [f]oo
+set $hypw14 [b]ar
+
+set $hypb1 q
+set $hypb2 w
+set $hypb3 e
+set $hypb4 a
+set $hypb5 s
+set $hypb6 d
+set $hypb7 z
+set $hypb8 x
+set $hypb9 c
+set $hypb10 r
+set $hypb11 v
+set $hypb12 t
+set $hypb13 f
+set $hypb14 b
+
+exec rename workspace 1 to $hypw1
+exec rename workspace 2 to $hypw2
+exec rename workspace 3 to $hypw3
+exec rename workspace 4 to $hypw4
+exec rename workspace 5 to $hypw5
+exec rename workspace 6 to $hypw6
+exec rename workspace 7 to $hypw7
+exec rename workspace 8 to $hypw8
+exec rename workspace 9 to $hypw9
+exec rename workspace 10 to $hypw10
+exec rename workspace 11 to $hypw11
+exec rename workspace 12 to $hypw12
+exec rename workspace 12 to $hypw13
+exec rename workspace 12 to $hypw14
+
+bindsym $hyp+$hypb1 workspace $hypw1
+bindsym $hyp+$hypb2 workspace $hypw2
+bindsym $hyp+$hypb3 workspace $hypw3
+bindsym $hyp+$hypb4 workspace $hypw4
+bindsym $hyp+$hypb5 workspace $hypw5
+bindsym $hyp+$hypb6 workspace $hypw6
+bindsym $hyp+$hypb7 workspace $hypw7
+bindsym $hyp+$hypb8 workspace $hypw8
+bindsym $hyp+$hypb9 workspace $hypw9
+bindsym $hyp+$hypb10 workspace $hypw10
+bindsym $hyp+$hypb11 workspace $hypw11
+bindsym $hyp+$hypb12 workspace $hypw12
+bindsym $hyp+$hypb13 workspace $hypw13
+bindsym $hyp+$hypb14 workspace $hypw14
+
+bindsym mod1+space mode "move container"
+
+mode "move container" {
+        bindsym mod1+$hypb1 move container to workspace $hypw1; mode "default"
+        bindsym mod1+$hypb2 move container to workspace $hypw2; mode "default"
+        bindsym mod1+$hypb3 move container to workspace $hypw3; mode "default"
+        bindsym mod1+$hypb4 move container to workspace $hypw4; mode "default"
+        bindsym mod1+$hypb5 move container to workspace $hypw5; mode "default"
+        bindsym mod1+$hypb6 move container to workspace $hypw6; mode "default"
+        bindsym mod1+$hypb7 move container to workspace $hypw7; mode "default"
+        bindsym mod1+$hypb8 move container to workspace $hypw8; mode "default"
+        bindsym mod1+$hypb8 move container to workspace $hypw8; mode "default"
+        bindsym mod1+$hypb9 move container to workspace $hypw9; mode "default"
+        bindsym mod1+$hypb10 move container to workspace $hypw10; mode "default"
+        bindsym mod1+$hypb11 move container to workspace $hypw11; mode "default"
+        bindsym mod1+$hypb12 move container to workspace $hypw12; mode "default"
+        bindsym mod1+$hypb13 move container to workspace $hypw13; mode "default"
+        bindsym mod1+$hypb14 move container to workspace $hypw14; mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+
+}

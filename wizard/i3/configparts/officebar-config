@@ -1,0 +1,97 @@
+
+#############
+#### BAR STUFF
+############
+
+set $statusline #7C8D25
+set $background #221206
+
+
+# 1 = border, 2 = background, 3 = foreground
+################
+set $fw1 #7C8D25
+set $fw2 #7C8D25
+set $fw3 #221206
+################
+set $iw1 #221206
+set $iw2 #221206
+set $iw3 #7C8D25
+################
+set $aw1 #7C8D25
+set $aw2 #7C8D25
+set $aw3 #221206
+################
+set $uw1 #7C8D25
+set $uw2 #7C8D25
+set $uw3 #221206
+################
+
+set $mobile_monitor eDP-1-1
+set $office_monitor HDMI-0
+set $off_state NONE
+set $main_monitor $mobile_monitor
+#set $main_monitor $office_monitor
+#set $off_monitor $mobile_monitor
+
+bar {
+    position bottom
+    font pango:DejaVu Sans Mono, Awesome 12
+
+
+    status_command i3blocks -c ~/.config/i3/i3blocks_first_bottom.conf
+    output $office_monitor
+        colors {
+                statusline $statusline
+                background $background
+                focused_workspace $fw1 $fw2 $fw3
+                inactive_workspace $iw1 $iw2 $iw3
+                active_workspace $aw1 $aw2 $aw3
+                urgent_workspace   $uw1 $uw2 $uw3
+        }
+
+}
+
+
+bar {
+    workspace_buttons no
+    position top
+    font pango:DejaVu Sans Mono, Awesome 10
+    output $office_monitor
+    status_command i3blocks -c ~/.config/i3/i3blocks_first_top.conf
+#
+  #
+        colors {
+                statusline $statusline
+                background $background
+                focused_workspace $fw1 $fw2 $fw3
+                inactive_workspace $iw1 $iw2 $iw3
+                active_workspace $aw1 $aw2 $aw3
+                urgent_workspace   $uw1 $uw2 $uw3
+        }
+}
+
+
+bar {
+     workspace_buttons no
+     position top
+     font pango:DejaVu Sans Mono, Awesome 10
+    output $office_monitor
+    status_command i3blocks -c ~/.config/i3/i3blocks_second_top.conf
+        colors {
+                statusline $statusline
+                background $background
+                focused_workspace $fw1 $fw2 $fw3
+                inactive_workspace $iw1 $iw2 $iw3
+                active_workspace $aw1 $aw2 $aw3
+                urgent_workspace   $uw1 $uw2 $uw3
+        }
+
+}
+
+
+
+
+client.focused $fw1 $fw2 $fw3
+client.focused_inactive $aw1 $aw2 $aw3
+client.unfocused  $iw1 $iw2 $iw3
+client.urgent $uw1 $uw2 $uw3

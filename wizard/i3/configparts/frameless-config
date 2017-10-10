@@ -1,0 +1,62 @@
+#################################
+#### FRAMELESS CHROME WINDOWS
+#################################
+set $inky_functions /home/brian/inky_functions
+#set $make_menu $(ls -t $frameless_dir | rofi -dmenu -i)
+bindsym $mod+o exec $inky_functions/handle_frameless.sh
+bindsym $mod+p exec $inky_functions/handle_portmaps.sh
+
+set $google /opt/google/chrome/google-chrome
+# set $pylab https://pylab.ada.sh/tree
+# set $devblog http://devblog.ada.sh
+# set $inbox https://inbox.google.com
+# set $ada https://ide.c9.io/braingineer/ada
+# #bindsym $mod+b exec $google --app=$devblog
+# #bindsym $mod+g exec $google --app=$inbox
+# #bindsym $mod+Shift+a exec $google --app=$ada
+# set $tv https://www.tradingview.com/chart/6YuzJKqJ/
+# set $kub https://ide.c9.io/braingineer/kubera
+# set $polo https://poloniex.com
+# set $twitter https://twitter.com
+# set $reddit https://reddit.com
+# set $ada https://ide.c9.io/braingineer/ada
+# set $pylab http://localhost:15252
+# set $ghost https://ide.c9.io/braingineer/ghost-jstwr
+# set $ghostlab http://localhost:8888
+
+bindsym $mod+$hyp+o exec $google --app=$(zenity --entry)
+bindsym $mod+Shift+o exec $google --app=$(xsel --clipboard)
+
+# set $appmode Open Frameless t,p,k,r,a,b,g,l +x
+# set $privateappmode Open Frameless t,r
+
+# bindsym $mod+Control+a mode "$appmode"
+# mode "$appmode" {
+#         bindsym t exec $google --app=$tv; mode "default"
+#         bindsym k exec $google --app=$kub; mode "default"
+#         bindsym p exec $google --app=$polo; mode "default"
+#         bindsym r exec $google --app=$reddit; mode "default"
+#         bindsym a exec $google --app=$ada; mode "default"
+#         bindsym b exec $google --app=$pylab; mode "default"
+#         bindsym g exec $google --app=$ghost; mode "default"
+#         bindsym l exec $google --app=$ghostlab; mode "default"
+
+#         # back to normal: Enter or Escape
+#         bindsym x mode "$privateappmode"
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+
+# mode "$privateappmode" {
+#         bindsym t exec $google --app=$twitter --incognito; mode "default"
+#         bindsym r exec $google --app=$reddit --incognito; mode "default"
+#         bindsym c exec $google --app=$(zenity --entry) --incognito; mode "default"
+
+#         # back to normal: Enter or Escape
+#         bindsym x   mode "$appmode"
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+
+set $newnote subl --command open /research/write/qwerty/journal/$(date +%b_%d)_$(zenity --entry).md
+bindsym $mod+Shift+n exec $newnote

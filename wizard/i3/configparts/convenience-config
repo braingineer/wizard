@@ -1,0 +1,30 @@
+
+#######################
+### aww yiss
+#######################3
+
+set $livestream
+bindsym $mod+control+v exec livestreamer $(zenity --entry) best
+
+bindsym $hyp+m exec ~/inky_functions/makediss.sh
+
+set $FUNCTIONDIR ~/inky_functions
+set $WALLPAPERDIR ~/Pictures/wallpapers
+
+
+
+
+bindsym XF86AudioRaiseVolume exec "amixer -q -D pulse set Master 2%+ unmute"
+bindsym $hyp+plus exec "amixer -q -D pulse set Master 2%+ unmute"
+
+bindsym XF86AudioLowerVolume exec "amixer -q -D pulse set Master 2%- unmute"
+bindsym $hyp+minus exec "amixer -q -D pulse set Master 2%- unmute"
+
+bindsym $hyp+space exec "amixer -D pulse set Master toggle"
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+
+#bindsym $mod+plus exec bash /home/brian/inky_functions/spotify_control.sh next
+#bindsym $mod+minus exec bash /home/brian/inky_functions/spotify_control.sh previous
+#bindsym XF86AudioPlay exec bash /home/brian/inky_functions/spotify_control.sh play-pause
+#bindsym $mod+Shift+plus exec bash /home/brian/inky_functions/spotify_control.sh volume +0.1
+#bindsym $mod+Shift+minus exec bash /home/brian/inky_functions/spotify_control.sh volume -0.1

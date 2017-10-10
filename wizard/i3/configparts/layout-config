@@ -1,0 +1,11 @@
+#############################
+# LAYOUT FUNCTIONS
+#############################
+
+### default layout:
+exec layout stacking
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+Shift+e layout stacking
+bindsym $mod+Shift+r layout toggle split
+bindsym $mod+Shift+t layout tabbed

@@ -1,0 +1,25 @@
+
+
+###############################
+######## SCRATCHPAD STUFF
+###############################
+
+for_window [class="Spotify"]  move scratchpad
+for_window [class="SPTerminal"] move scratchpad
+for_window [class="SPSublime"] move scratchpad
+for_window [class="Slack"] move scratchpad
+for_window [class="Telegram"] move scratchpad
+for_window [class="Zotero"] move scratchpad
+
+bindsym $mod+space [class="SPTerminal"] scratchpad show
+bindsym $mod+control+space exec terminator --class='SPTerminal'
+bindsym $mod+n [class="Sublime_text"] scratchpad show
+bindsym $mod+m [class="Spotify"] scratchpad show
+bindsym $mod+s [class="Slack"] scratchpad show
+bindsym $mod+z [class="Zotero"] scratchpad show
+bindsym $mod+t [class="Telegram"] scratchpad show
+
+bindsym $mod+Tab scratchpad show
+bindsym $mod+Shift+Tab move scratchpad
+
+bindsym $mod+l exec bash ~/inky_functions/i3safelock.sh

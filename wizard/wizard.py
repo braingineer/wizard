@@ -7,25 +7,13 @@ import sys
 #import libtmux
 import os
 
+from wizard.settings import *
+
+
 logging.basicConfig(format='-[%(prompt)s] %(message)s')
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-I3DIR = os.path.join(os.environ['HOME'], '.config/i3')
-BGDIR = os.path.join(os.environ['HOME'], 'Pictures/wallpapers')
-
-all_bg = glob.glob(os.path.join(BGDIR, "*.png"))
-all_bg += glob.glob(os.path.join(BGDIR, "*.jpg"))
-all_bg += glob.glob(os.path.join(BGDIR, "*/*.png"))
-all_bg += glob.glob(os.path.join(BGDIR, "*/*.jpg"))
-
-
-screen_configs = {'office': [('HDMI-0', ['--auto', '--primary']),
-                             ('eDP-1-1', ['--off'])],
-                  'laptop': [('HDMI-0', ['--off']),
-                             ('eDP-1-1', ['--auto', '--primary'])]}
-
-bgs = {'gnu': os.path.join(BGDIR, 'minimalistdump_fromreddit/gnu.png')}
 
 def _run_in_tmux(name, command, return_output=False):
     if isinstance(command, six.string_types):
@@ -73,6 +61,9 @@ def _single_arg(name, args):
     assert len(args) == 1, name + " only accepts single arguments"
     return args[0]
 
+def _scrot(name):
+    subprocess.Popen(['scrot', '-s', os.path.join(SCREENSHOTDIR, name+'.png')]).wait()
+
 
 class WizardShell(cmd.Cmd):
     intro = "Hello Brian. What would you like to do?"
@@ -85,6 +76,9 @@ class WizardShell(cmd.Cmd):
 
     def do_echo(self, args):
         _output(args)
+
+    def do_scrot(self, args):
+        _scrot(_single_arg('scrot', args))
 
     def do_pylab(self, arg):
         if len(arg) > 0:
@@ -118,6 +112,8 @@ class WizardShell(cmd.Cmd):
         elif arg == "random":
             import random
             _set_bg(random.choice(all_bg))
+        elif arg == 'none':
+            print("NOT IMPLEMENTED")
         elif arg not in bgs:
             raise ValueError(arg + " not in available backgrounds")
         else:

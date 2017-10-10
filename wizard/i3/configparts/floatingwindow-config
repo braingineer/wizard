@@ -1,0 +1,30 @@
+###############################
+###### FLOATING WINDOWS
+###############################
+
+
+# -----------------------------
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# -----------------------------
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# -----------------------------
+
+for_window [class="Gedit"] floating enable
+for_window [title="Figure.*"] floating enable
+for_window [class="Slack"] floating enable
+for_window [title="shell"] floating disable
+for_window [instance="^localhost.*$"] floating disable
+for_window [class='mpv'] floating enable
+
+for_window [class="^.*"] border pixel 0
+
+# because latex was opening evince and evince was stealing focus..
+# TODO: remove?
+no_focus [class="Evince"]
+focus_on_window_activation none

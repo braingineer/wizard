@@ -1,0 +1,9 @@
+keep working.
+you're awesome.
+fail fast.
+dream big.
+go beyond.
+never stop.
+be a machine.
+are you focusing?
+%s/sleep/hack/g
