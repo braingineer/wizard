@@ -63,4 +63,4 @@ bindsym $mod+Shift+q kill
 
 # -----------------------------
 
-bindsym $mod+l exec bash ~/.wizard/i3safelock.sh
+# bindsym $mod+l exec bash ~/.wizard/i3safelock.sh

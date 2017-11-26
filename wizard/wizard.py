@@ -8,6 +8,7 @@ import sys
 import os
 
 from wizard.settings import *
+from wizard.i3 import utils as i3utils
 
 
 logging.basicConfig(format='-[%(prompt)s] %(message)s')
@@ -32,6 +33,10 @@ def _replace_i3_config(replace_version):
     subprocess.Popen(['cp', config, config_backup])
     assert os.path.exists(config_new), replace_version + " does not exist"
     subprocess.Popen(['cp', config_new, config])
+    _i3_restart()
+
+def _gen_i3_config(replace_version):
+    i3utils.copy_config(replace_version)
     _i3_restart()
 
 def _jupyter_notebook(notebook_dir=None, port=None, in_tmux=True):
@@ -64,6 +69,13 @@ def _single_arg(name, args):
 def _scrot(name):
     subprocess.Popen(['scrot', '-s', os.path.join(SCREENSHOTDIR, name+'.png')]).wait()
 
+def _xinput(device_id, property_id, value):
+    subprocess.Popen(['xinput', 'set-prop', device_id, property_id, value])
+
+def _get_named_xinput(name):
+    config = settings.get_config()
+    if 'xinput' not in config:
+        print("NO XINPUT IN CONFIG")
 
 class WizardShell(cmd.Cmd):
     intro = "Hello Brian. What would you like to do?"
@@ -87,12 +99,13 @@ class WizardShell(cmd.Cmd):
 
     def do_i3env(self, args):
         arg = _single_arg("i3env", args)
+
         if arg == "ls":
             files = glob.glob(os.path.join(I3DIR, "config_*"))
             files = [os.path.split(file)[-1] for file in files]
             _output(", ".join(files), prompt="options")
         else:
-            _replace_i3_config(arg)
+            _gen_i3_config(arg)
 
     def do_screens(self, args):
         arg = _single_arg("screens", args)
@@ -118,6 +131,19 @@ class WizardShell(cmd.Cmd):
             raise ValueError(arg + " not in available backgrounds")
         else:
             _set_bg(bgs[arg])
+
+    def do_xinput(self, args):
+        args = args.split(" ")
+        if args[0] == 'set':
+            name = args[1]
+            device_id = args[2]
+            prop_id = args[3]
+
+        import argparse
+        parser = argparse.ArgumentParser()
+        parser.add_argument("NAME")
+        parser.add_argument("id", type=int)
+        print(parser.parse_args(args))
 
     def precmd(self, line):
         return line
